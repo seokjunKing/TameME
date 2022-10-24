@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - Wall
+  - Ice
+  - Point
+  - Blue
+  - Green
+  - NPC
+  - Quest
+  - Open
+  - Rose
+  - Enemy
+  - Destroy
+  - Ladder
+  - Lever
+  - Trap
+  - Grab
+  - Camera
+  - Pull
+  - NextScene
+  - Wind
+  - Potion
+  - saveP1
+  - saveP2
+  - Bird
+  - saveP
+  - NextChapter
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Platform
+  - Water
+  - UI
+  - Blue
+  - BG
+  - Egg
+  - Player
+  - PlayerDamaged
+  - Enemy
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - dd
+  - gg
+  - 
+  - 
+  - 
+  - Touch
+  - 
+  m_SortingLayers:
+  - name: bg
+    uniqueID: 4113729467
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 1288367915
+    locked: 0
+  - name: Character
+    uniqueID: 2467656261
+    locked: 0
