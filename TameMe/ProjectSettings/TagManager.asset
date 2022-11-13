@@ -30,6 +30,8 @@ TagManager:
   - Bird
   - saveP
   - NextChapter
+  - GameManager
+  - Protect
   layers:
   - Default
   - TransparentFX

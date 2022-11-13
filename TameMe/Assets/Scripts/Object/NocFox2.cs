@@ -70,6 +70,5 @@ public class NocFox2 : MonoBehaviour
         yield return new WaitForSeconds(3f);
         Exit.SetActive(true);
         Player.isControl = true;
-
     }
 }

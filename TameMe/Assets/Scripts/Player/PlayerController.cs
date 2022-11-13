@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour
 
     public bool isDead = false;
 
+    public bool inputLeft = false;
+    public bool inputRight = false;
+    public bool inputJump = false;
+
     bool _onJump;
 
     int num_Scene;
@@ -50,11 +54,16 @@ public class PlayerController : MonoBehaviour
     public FadeInOut fade;
     public Transform[] spawnPoint;
 
+    public GameObject mobileButtonUI;
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         num_Scene = SceneManager.GetActiveScene().buildIndex;
+
+        UIButtonManager ui = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UIButtonManager>();
+        ui.Init();
     }
 
     void Start()
@@ -70,9 +79,15 @@ public class PlayerController : MonoBehaviour
             Jump();
             Spawn();
             //Lever();
+            if(mobileButtonUI.activeSelf == false)
+            {
+                mobileButtonUI.SetActive(true);
+            }
         }
         else
         {
+            mobileButtonUI.SetActive(false);
+
             anim.SetBool("onWalk", false);
             anim.SetBool("onSlide", false);
             anim.SetBool("onPush", false);
@@ -174,6 +189,7 @@ public class PlayerController : MonoBehaviour
 
         if (_onBlue)
         {
+            
             anim.speed = animSpeed * 0.5f;
             _realMoveSpeed = 2f * _moveSpeed;
             anim.SetBool("onSlide", true);
@@ -184,11 +200,28 @@ public class PlayerController : MonoBehaviour
             _realMoveSpeed = _moveSpeed;
             anim.SetBool("onSlide", false);
         }
+
+
+        if (inputRight)
+        {
+            rigid.velocity = new Vector2(1 * _realMoveSpeed * Time.deltaTime, rigid.velocity.y);
+            anim.speed = animSpeed;
+            anim.SetBool("onWalk", true);
+            transform.localScale = new Vector3(0.125f, 0.125f, 1);
+        }
+        else if (inputLeft)
+        {
+            rigid.velocity = new Vector2(-1 * _realMoveSpeed * Time.deltaTime, rigid.velocity.y);
+            anim.speed = animSpeed;
+            anim.SetBool("onWalk", true);
+            transform.localScale = new Vector3(-0.125f, 0.125f, 1);
+        }
+        
     }
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") && !_onJump)
+        if (Input.GetButtonDown("Jump") && !_onJump)    // PC
         {
             rigid.AddForce(Vector2.up * _realJumpForce, ForceMode2D.Impulse);
 
@@ -201,6 +234,20 @@ public class PlayerController : MonoBehaviour
                 _onJump = true;
             }
             
+        }
+
+        if (inputJump && !_onJump)  // Mobile
+        {
+            rigid.AddForce(Vector2.up * _realJumpForce, ForceMode2D.Impulse);
+
+            if (_onJump)
+            {
+
+            }
+            else
+            {
+                _onJump = true;
+            }
         }
 
     }

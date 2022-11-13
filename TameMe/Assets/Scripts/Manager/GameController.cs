@@ -31,18 +31,25 @@ public class GameController : MonoBehaviour
     public bool _isBlue = false;
     public bool _isGreen = false;
 
-    public int likeability_rose; // 마이너스: 여우 | 플러스 : 장미
+    public int likeability_rose;
     public int likeability_fox;
 
     public bool isFox = false;
 
     public FadeInOut fade;
+
+    private void Awake()
+    {
+        DataManager.instance.LoadData();
+        likeability_fox = DataManager.instance.nowPlayer.pointFox;
+        likeability_rose = DataManager.instance.nowPlayer.pointRose;
+        Debug.Log(likeability_rose);
+    }
+
     void Start()
     {
+        DataManager.instance.SaveData();
         num_Scene = SceneManager.GetActiveScene().buildIndex;
-
-        likeability_fox += DataManager.instance.nowPlayer.pointFox;
-        likeability_rose += DataManager.instance.nowPlayer.pointRose;
     }
 
     void Update()
@@ -118,9 +125,21 @@ public class GameController : MonoBehaviour
         DataManager.instance.SaveData();
         Time.timeScale = 1f;
     }
+    public void OnClickRoseLikeAbillityMinus()
+    {
+        DataManager.instance.nowPlayer.pointRose -= 10;
+        DataManager.instance.SaveData();
+        Time.timeScale = 1f;
+    }
     public void OnClickFoxLikeAbillity()
     {
         DataManager.instance.nowPlayer.pointFox += 10;
+        DataManager.instance.SaveData();
+        Time.timeScale = 1f;
+    }
+    public void OnClickFoxLikeAbillityMinus()
+    {
+        DataManager.instance.nowPlayer.pointFox -= 10;
         DataManager.instance.SaveData();
         Time.timeScale = 1f;
     }
@@ -142,10 +161,20 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1f;
         fade.OnClickFade();
     }
+    public void OnClickReplay()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(num_Scene);
+    }
     public void OnClickGoMain()
     {
         Time.timeScale = 1f;
         fade.GoMainFade();
+    }
+    public void OnClickMenuOn()
+    {
+        Time.timeScale = 0f;
+        Menu.SetActive(true);
     }
     public void OnClickMenuOff()
     {
