@@ -14,12 +14,13 @@ public class Enemy : MonoBehaviour
     GameObject traceTarget;
 
     bool isTracing = false;
-    //bool isRight = false;
 
     [SerializeField] public float speed = 1.0f;
 
     public bool idle = false;
     public bool onBlue = false;
+    
+
 
     public PlayerController player;
     public Transform spawnPoint;
@@ -35,6 +36,7 @@ public class Enemy : MonoBehaviour
         if (player.isDead)
         {
             transform.position = spawnPoint.transform.position;
+            
             onBlue = false;
         }
     }
@@ -180,7 +182,7 @@ public class Enemy : MonoBehaviour
 
         
     }
-
+  
     IEnumerator ChangeMovement()
     {
         //movementFlag = Random.Range(0, 3);
@@ -202,6 +204,13 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(moveTimer);
         StartCoroutine(ChangeMovement());
         
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -231,7 +240,7 @@ public class Enemy : MonoBehaviour
         {
             traceTarget = collision.gameObject;
 
-            StopCoroutine(ChangeMovement());
+            StopAllCoroutines();
         }
     }
     void OnTriggerStay2D(Collider2D collision)

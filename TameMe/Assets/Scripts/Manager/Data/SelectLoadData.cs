@@ -9,6 +9,18 @@ public class SelectLoadData : MonoBehaviour
     public Text[] slotText;		// 슬롯버튼 아래에 존재하는 Text들
     public Text[] slotText2;
 
+    public Image[] slotImage;
+    public Image[] slotImage2;
+
+    public Sprite OnSlotImage;
+    public Sprite OffSlotImage;
+
+    public Image[] buttonImage;
+    public Image[] buttonImage2;
+
+    public Sprite OnButtonImage;
+    public Sprite OffButtonImage;
+
     public GameObject LoadSlotPanel;
     public GameObject NewSlotPanel;
 
@@ -56,9 +68,17 @@ public class SelectLoadData : MonoBehaviour
                     slotText[i].text = "새 게임";
                     slotText2[i].text = "새 게임";
                 }
+                buttonImage[i].sprite = OnButtonImage;
+                buttonImage2[i].sprite = OnButtonImage;
+                slotImage[i].sprite = OnSlotImage;
+                slotImage2[i].sprite = OnSlotImage;
             }
             else	// 데이터가 없는 경우
             {
+                buttonImage[i].sprite = OffButtonImage;
+                buttonImage2[i].sprite = OffButtonImage;
+                slotImage[i].sprite = OffSlotImage;
+                slotImage2[i].sprite = OffSlotImage;
                 slotText[i].text = "새 게임";
                 slotText2[i].text = "새 게임";
             }
